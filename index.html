@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-black">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INVIXTUS | Elite Trading Edge</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons (for UI elements) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Simple, clean Inter font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        mono: ['ui-monospace', 'monospace'],
+                    },
+                    colors: {
+                        black: '#000000',
+                        offblack: '#070707',
+                        darkgray: '#121212',
+                        white: '#ffffff',
+                    },
+                    animation: {
+                        'marquee': 'marquee 30s linear infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            overflow-x: hidden; 
+        }
+        
+        /* Clean Monochromatic Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .glass-nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Ambient White Glows */
+        .glow-bg-1 {
+            position: fixed; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 60%);
+            top: -200px; left: -200px; z-index: -1;
+            border-radius: 50%;
+        }
+        
+        /* Interactive Hover States */
+        .card-hover:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-invert {
+            background: #fff;
+            color: #000;
+            border: 1px solid #fff;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .btn-invert:hover {
+            background: transparent;
+            color: #fff;
+        }
+
+        /* Modal specific */
+        #payment-modal { transition: opacity 0.3s ease; }
+        #payment-modal-content { transition: transform 0.3s ease; }
+        .modal-open { overflow: hidden; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #666; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <!-- Ambient Background -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="glow-bg-1 animate-float"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-8 h-8 border border-white/20 rounded flex items-center justify-center bg-white/5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+                    </div>
+                    <span class="font-semibold text-lg tracking-wide">INVIXTUS</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8 text-sm">
+                    <a href="#benefits" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav_benefits">Benefits</a>
+                    <a href="#community" class="text-gray-400 hover:text-white transition-colors" data-i18n="nav_community">Community</a>
+                    
+                    <!-- Language Switcher -->
+                    <div class="flex items-center gap-2 border border-white/20 bg-black/50 rounded-md px-2 py-1 ml-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-gray-400"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
+                        <select id="lang-switcher" onchange="changeLanguage(this.value)" class="bg-transparent text-gray-300 text-sm focus:outline-none cursor-pointer">
+                            <option value="en">English</option>
+                            <option value="hi">हिंदी (Hindi)</option>
+                        </select>
+                    </div>
+
+                    <a href="#pricing" class="btn-invert px-5 py-2 font-medium ml-2" data-i18n="nav_join">
+                        Join Elite
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <div class="flex items-center gap-2 border border-white/20 bg-black/50 rounded-md px-2 py-1 mr-4">
+                        <select id="lang-switcher-mobile" onchange="changeLanguage(this.value)" class="bg-transparent text-gray-300 text-xs focus:outline-none cursor-pointer">
+                            <option value="en">EN</option>
+                            <option value="hi">HI</option>
+                        </select>
+                    </div>
+                    <a href="#pricing" class="text-xs border border-white px-3 py-1.5 rounded">Join</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Market Ticker -->
+    <div class="w-full bg-white/5 border-b border-white/10 pt-20 overflow-hidden flex relative z-40">
+        <div class="flex whitespace-nowrap animate-marquee py-2 font-mono text-xs text-gray-400">
+            <div id="ticker-content" class="flex gap-12 px-4 items-center"></div>
+            <div id="ticker-content-clone" class="flex gap-12 px-4 items-center"></div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-20 lg:pt-32 lg:pb-24 flex items-center justify-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center">
+            
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-gray-300 text-xs font-medium mb-8">
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                <span data-i18n="hero_badge">Knowledge is the Ultimate Edge</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-semibold leading-tight mb-6" data-i18n="hero_title">
+                Master the Markets.<br>
+                <span class="text-gray-400">Become Invixtus.</span>
+            </h1>
+            
+            <p class="text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto font-light" data-i18n="hero_subtitle">
+                We bridge the gap between blind signals and actual market mastery. Gain access to the exclusive Premium Invi Group, high-probability setups, and extensive education.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#pricing" class="w-full sm:w-auto btn-invert px-8 py-3.5 text-sm font-medium flex items-center justify-center gap-2" data-i18n="btn_claim">
+                    Claim Lifetime Access
+                </a>
+                <a href="#benefits" class="w-full sm:w-auto glass-panel hover:bg-white/10 text-white px-8 py-3.5 text-sm font-medium transition-all flex items-center justify-center gap-2" data-i18n="btn_benefits">
+                    Explore Benefits
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Benefits Section -->
+    <section id="benefits" class="py-20 relative border-t border-white/5 bg-offblack">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-semibold mb-4" data-i18n="benefits_title">Premium Invi Group Features</h2>
+                <p class="text-gray-400 text-sm font-light max-w-2xl mx-auto" data-i18n="benefits_subtitle">Everything you unlock with your 108 USDTPRO one-time lifetime fee. No hidden fees, just pure alpha.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Benefit 1 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="crown" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b1_title">Premium Invi Group</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b1_desc">Direct entry into our highly guarded community of professional traders. Network, share charts, and grow alongside the best.</p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="target" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b2_title">Institutional Signals</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b2_desc">High-probability setups for Forex, Indian Equities, and Crypto, complete with exact Entry, Stop Loss, and Take Profit levels.</p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="book-open" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b3_title">Resource Library</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b3_desc">Access hundreds of hours of recorded masterclasses covering Smart Money Concepts (SMC), Price Action, and Order Blocks.</p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="radar" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b4_title">Early Project Radar</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b4_desc">Get alpha on upcoming Web3 projects, Crypto IDOs, and new Indian IPOs before they hit mainstream retail media.</p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="brain-circuit" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b5_title">Trading Psychology</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b5_desc">Master your mind. Learn how to handle losses, control FOMO, and maintain the discipline required for consistent profitability.</p>
+                </div>
+
+                <!-- Benefit 6 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="shield" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b6_title">Risk Management</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b6_desc">Plug-and-play position sizing calculators and rulesets to ensure you never blow an account and always protect your capital.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social & Community Section -->
+    <section id="community" class="py-20 relative border-t border-white/5 bg-black">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n="social_title">Join Our Public Community</h2>
+            <p class="text-gray-400 text-sm font-light mb-12 max-w-xl mx-auto" data-i18n="social_desc">Follow our journey, get free market insights, and stay updated on the latest financial news across our official channels.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <!-- Instagram (Hardcoded SVG to guarantee it shows) -->
+                <a href="#" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </div>
+                    <span class="font-medium text-sm text-white mb-1">Instagram</span>
+                    <span class="text-xs text-gray-500 font-light">@InvixtusOfficial</span>
+                </a>
+
+                <!-- YouTube (Hardcoded SVG to guarantee it shows) -->
+                <a href="#" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </div>
+                    <span class="font-medium text-sm text-white mb-1">YouTube</span>
+                    <span class="text-xs text-gray-500 font-light">Invixtus Trading</span>
+                </a>
+
+                <!-- Telegram (Hardcoded SVG to guarantee it shows) -->
+                <a href="https://t.me/nglthegreat" target="_blank" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    </div>
+                    <span class="font-medium text-sm text-white mb-1">Telegram</span>
+                    <span class="text-xs text-gray-500 font-light">@nglthegreat</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout / Pricing Section -->
+    <section id="pricing" class="py-24 relative border-t border-white/5 bg-offblack">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="glass-panel p-8 md:p-12 text-center relative overflow-hidden">
+                
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
+                    Lifetime Access
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n="pricing_title">Invixtus Access</h2>
+                <p class="text-gray-400 text-sm mb-8 max-w-md mx-auto font-light" data-i18n="pricing_desc">
+                    Secure your position. Pay using the custom USDTPRO token via your decentralized wallet to instantly unlock the Premium Invi Group terminal forever.
+                </p>
+                
+                <div class="mb-8">
+                    <span class="text-5xl md:text-6xl font-bold text-white tracking-tight">108</span>
+                    <span class="text-sm font-medium text-gray-400 ml-2" data-i18n="pricing_period">USDTPRO / Lifetime</span>
+                </div>
+
+                <button onclick="openPaymentModal()" class="w-full max-w-sm mx-auto btn-invert py-4 text-sm font-medium flex justify-center items-center gap-2" data-i18n="btn_pay">
+                    <i data-lucide="wallet" class="w-4 h-4"></i> Initialize Payment
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-white/10 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-400"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+                    <span class="font-medium text-gray-400">INVIXTUS</span>
+                </div>
+                
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
+                    <a href="https://t.me/nglthegreat" target="_blank" class="text-gray-500 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 text-center">
+                <p class="text-[11px] text-gray-600 leading-relaxed max-w-3xl mx-auto mb-4 font-light">
+                    Disclaimer: INVIXTUS and the Premium Invi Group provide educational content and market analysis. Trading carries a high risk of loss. The knowledge shared here is not financial advice. Ensure you fully understand the risks involved. Payments are accepted strictly in USDTPRO token.
+                </p>
+                <p class="text-xs text-gray-500">
+                    &copy; 2026 INVIXTUS. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- PAYMENT MODAL OVERLAY -->
+    <!-- ========================================== -->
+    <div id="payment-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none">
+        
+        <div id="payment-modal-content" class="bg-darkgray border border-white/10 w-full max-w-md rounded-xl p-8 shadow-2xl relative scale-95">
+            
+            <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div class="text-center mb-6 pt-2">
+                <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center mx-auto mb-4 bg-white/5">
+                    <i data-lucide="qr-code" class="w-5 h-5 text-white"></i>
+                </div>
+                <h3 class="text-xl font-medium text-white mb-1" data-i18n="modal_title">Deposit Required</h3>
+                <p class="text-gray-400 text-xs font-light" data-i18n="modal_desc">Send exactly <span class="text-white font-medium">108 USDTPRO</span> to the address below.</p>
+            </div>
+
+            <div class="bg-black border border-white/10 rounded-lg p-4 mb-6">
+                <p class="text-[10px] text-gray-500 font-semibold uppercase tracking-wider mb-2" data-i18n="modal_address_label">Deposit Address</p>
+                <div class="flex items-center justify-between gap-3 bg-white/5 rounded p-2.5 border border-white/5">
+                    <span id="wallet-address" class="font-mono text-xs text-gray-300 break-all select-all">
+                        0xabb2237b3fff75eb90f515e5b8487077105546c9
+                    </span>
+                    <button onclick="copyAddress()" class="shrink-0 text-gray-400 hover:text-white p-1 transition-colors" title="Copy Address">
+                        <i id="copy-icon" data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                
+                <div class="mt-3 flex items-start gap-2">
+                    <i data-lucide="alert-circle" class="w-3 h-3 text-gray-500 shrink-0 mt-0.5"></i>
+                    <p class="text-[10px] text-gray-500 leading-relaxed font-light" data-i18n="modal_warning">
+                        Ensure you are sending USDTPRO on the correct network. Incorrect transfers cannot be recovered.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <button onclick="simulateVerification()" id="verify-btn" class="w-full btn-invert py-3 rounded text-sm font-medium transition-all flex justify-center items-center gap-2">
+                    <span data-i18n="modal_btn">I have sent the payment</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+                <p class="text-center text-[10px] text-gray-500 font-light" data-i18n="modal_footer">Proceed to Telegram (@nglthegreat) for verification.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // ==========================================
+        // i18n Language Translation Logic
+        // ==========================================
+        const translations = {
+            en: {
+                nav_benefits: "Benefits",
+                nav_community: "Community",
+                nav_join: "Join Elite",
+                hero_badge: "Knowledge is the Ultimate Edge",
+                hero_title: "Master the Markets.<br><span class='text-gray-400'>Become Invixtus.</span>",
+                hero_subtitle: "We bridge the gap between blind signals and actual market mastery. Gain access to the exclusive Premium Invi Group, high-probability setups, and extensive education.",
+                btn_claim: "Claim Lifetime Access",
+                btn_benefits: "Explore Benefits",
+                benefits_title: "Premium Invi Group Features",
+                benefits_subtitle: "Everything you unlock with your 108 USDTPRO one-time lifetime fee. No hidden fees, just pure alpha.",
+                b1_title: "Premium Invi Group",
+                b1_desc: "Direct entry into our highly guarded community of professional traders. Network, share charts, and grow alongside the best.",
+                b2_title: "Institutional Signals",
+                b2_desc: "High-probability setups for Forex, Indian Equities, and Crypto, complete with exact Entry, Stop Loss, and Take Profit levels.",
+                b3_title: "Resource Library",
+                b3_desc: "Access hundreds of hours of recorded masterclasses covering Smart Money Concepts (SMC), Price Action, and Order Blocks.",
+                b4_title: "Early Project Radar",
+                b4_desc: "Get alpha on upcoming Web3 projects, Crypto IDOs, and new Indian IPOs before they hit mainstream retail media.",
+                b5_title: "Trading Psychology",
+                b5_desc: "Master your mind. Learn how to handle losses, control FOMO, and maintain the discipline required for consistent profitability.",
+                b6_title: "Risk Management",
+                b6_desc: "Plug-and-play position sizing calculators and rulesets to ensure you never blow an account and always protect your capital.",
+                social_title: "Join Our Public Community",
+                social_desc: "Follow our journey, get free market insights, and stay updated on the latest financial news across our official channels.",
+                pricing_title: "Invixtus Access",
+                pricing_desc: "Secure your position. Pay using the custom USDTPRO token via your decentralized wallet to instantly unlock the Premium Invi Group terminal forever.",
+                pricing_period: "USDTPRO / Lifetime",
+                btn_pay: "Initialize Payment",
+                modal_title: "Deposit Required",
+                modal_desc: "Send exactly <span class='text-white font-medium'>108 USDTPRO</span> to the address below.",
+                modal_address_label: "Deposit Address",
+                modal_warning: "Ensure you are sending USDTPRO on the correct network. Incorrect transfers cannot be recovered.",
+                modal_btn: "I have sent the payment",
+                modal_footer: "Proceed to Telegram (@nglthegreat) for verification."
+            },
+            hi: {
+                nav_benefits: "लाभ",
+                nav_community: "समुदाय",
+                nav_join: "एलीट से जुड़ें",
+                hero_badge: "ज्ञान ही अंतिम बढ़त है",
+                hero_title: "बाजारों में महारत हासिल करें।<br><span class='text-gray-400'>Invixtus बनें।</span>",
+                hero_subtitle: "हम अंधे सिग्नल्स और वास्तविक बाजार महारत के बीच की खाई को पाटते हैं। प्रीमियम इनवी ग्रुप (Invi Group), उच्च-संभावना वाले सेटअप और व्यापक शिक्षा तक पहुंच प्राप्त करें।",
+                btn_claim: "आजीवन पहुंच प्राप्त करें",
+                btn_benefits: "लाभ देखें",
+                benefits_title: "प्रीमियम इनवी ग्रुप की विशेषताएं",
+                benefits_subtitle: "108 USDTPRO आजीवन शुल्क के साथ आप जो कुछ भी अनलॉक करते हैं। कोई छिपा हुआ शुल्क नहीं।",
+                b1_title: "प्रीमियम इनवी ग्रुप",
+                b1_desc: "पेशेवर ट्रेडर्स के हमारे समुदाय में सीधा प्रवेश। नेटवर्क बनाएं, चार्ट साझा करें और सर्वश्रेष्ठ के साथ बढ़ें।",
+                b2_title: "संस्थागत सिग्नल्स",
+                b2_desc: "विदेशी मुद्रा, भारतीय इक्विटी और क्रिप्टो के लिए उच्च-संभावना सेटअप, सटीक प्रवेश, स्टॉप लॉस और टेक प्रॉफिट स्तर के साथ।",
+                b3_title: "संसाधन पुस्तकालय",
+                b3_desc: "स्मार्ट मनी कॉन्सेप्ट्स (SMC), प्राइस एक्शन और ऑर्डर ब्लॉक्स को कवर करने वाली रिकॉर्डेड मास्टरक्लास तक पहुंच।",
+                b4_title: "प्रोजेक्ट रडार",
+                b4_desc: "आगामी Web3 प्रोजेक्ट्स, क्रिप्टो IDO और नए भारतीय IPO पर मुख्यधारा की मीडिया में आने से पहले जानकारी प्राप्त करें।",
+                b5_title: "ट्रेडिंग मनोविज्ञान",
+                b5_desc: "अपने दिमाग पर नियंत्रण पाएं। नुकसान को संभालना, FOMO को नियंत्रित करना और लाभप्रदता के लिए आवश्यक अनुशासन बनाए रखना सीखें।",
+                b6_title: "जोखिम प्रबंधन",
+                b6_desc: "स्थिति आकार कैलकुलेटर और नियम यह सुनिश्चित करने के लिए कि आप अपनी पूंजी की हमेशा रक्षा करें।",
+                social_title: "हमारे सार्वजनिक समुदाय से जुड़ें",
+                social_desc: "हमारी यात्रा का पालन करें, मुफ्त बाजार अंतर्दृष्टि प्राप्त करें, और हमारे आधिकारिक चैनलों पर नवीनतम वित्तीय समाचारों पर अपडेट रहें।",
+                pricing_title: "इनविक्टस एक्सेस",
+                pricing_desc: "अपनी जगह सुरक्षित करें। हमेशा के लिए प्रीमियम इनवी ग्रुप टर्मिनल को अनलॉक करने के लिए अपने विकेन्द्रीकृत वॉलेट के माध्यम से कस्टम USDTPRO टोकन का उपयोग करके भुगतान करें।",
+                pricing_period: "USDTPRO / आजीवन",
+                btn_pay: "भुगतान प्रारंभ करें",
+                modal_title: "जमा आवश्यक",
+                modal_desc: "नीचे दिए गए पते पर ठीक <span class='text-white font-medium'>108 USDTPRO</span> भेजें।",
+                modal_address_label: "जमा का पता",
+                modal_warning: "सुनिश्चित करें कि आप सही नेटवर्क पर USDTPRO भेज रहे हैं। गलत स्थानान्तरण पुनर्प्राप्त नहीं किया जा सकता है।",
+                modal_btn: "मैंने भुगतान कर दिया है",
+                modal_footer: "सत्यापन के लिए टेलीग्राम (@nglthegreat) पर जाएं।"
+            }
+        };
+
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            // Sync mobile and desktop dropdowns
+            document.getElementById('lang-switcher').value = lang;
+            document.getElementById('lang-switcher-mobile').value = lang;
+        }
+
+        // ==========================================
+        // Ticker Logic
+        // ==========================================
+        const tickerItems = [
+            { text: "INVI GROUP: Deep dive into SMC setups today" },
+            { text: "EDUCATION: New Risk Management module uploaded" },
+            { text: "ALPHA: Crypto IDO radar updated" },
+            { text: "MARKET: Nifty key resistance levels mapped" },
+        ];
+        function buildTicker(containerId) {
+            const container = document.getElementById(containerId);
+            let html = '';
+            tickerItems.forEach(item => {
+                html += `
+                    <div class="flex items-center gap-3">
+                        <span class="w-1.5 h-1.5 bg-white/50 rounded-full"></span>
+                        <span class="tracking-wide">${item.text}</span>
+                        <span class="text-white/10 mx-6">|</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        buildTicker('ticker-content');
+        buildTicker('ticker-content-clone');
+
+        // ==========================================
+        // Modal & Verification Logic
+        // ==========================================
+        const modal = document.getElementById('payment-modal');
+        const modalContent = document.getElementById('payment-modal-content');
+
+        function openPaymentModal() {
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            document.body.classList.add('modal-open'); 
+        }
+
+        function closePaymentModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.add('scale-95');
+            document.body.classList.remove('modal-open');
+            
+            const btn = document.getElementById('verify-btn');
+            const currentLang = document.getElementById('lang-switcher').value;
+            const btnText = translations[currentLang]['modal_btn'];
+            btn.innerHTML = `<span data-i18n="modal_btn">${btnText}</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
+            btn.classList.remove('opacity-50', 'pointer-events-none');
+            lucide.createIcons();
+        }
+
+        function copyAddress() {
+            const address = document.getElementById('wallet-address').innerText.trim();
+            const icon = document.getElementById('copy-icon');
+
+            navigator.clipboard.writeText(address).then(() => {
+                icon.setAttribute('data-lucide', 'check');
+                icon.classList.replace('text-gray-400', 'text-white');
+                lucide.createIcons();
+                
+                setTimeout(() => {
+                    icon.setAttribute('data-lucide', 'copy');
+                    icon.classList.replace('text-white', 'text-gray-400');
+                    lucide.createIcons();
+                }, 2000);
+            }).catch(err => console.error('Failed to copy', err));
+        }
+
+        function simulateVerification() {
+            const btn = document.getElementById('verify-btn');
+            
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Initializing...';
+            btn.classList.add('opacity-50', 'pointer-events-none');
+            lucide.createIcons();
+            
+            const telegramUsername = 'nglthegreat';
+            const preFilledMessage = encodeURIComponent('I have done payment');
+            const telegramUrl = `https://t.me/${telegramUsername}?text=${preFilledMessage}`;
+
+            setTimeout(() => {
+                window.open(telegramUrl, '_blank');
+                setTimeout(() => {
+                    closePaymentModal();
+                }, 500);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
