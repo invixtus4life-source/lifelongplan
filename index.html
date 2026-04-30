@@ -154,7 +154,7 @@
                         <a href="#" onclick="switchView('about-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_about">About</a>
                         <a href="#" onclick="switchView('education-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_education">Education</a>
                         <a href="#" onclick="navigateAndScroll('results')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_results">Results</a>
-                        <a href="#" onclick="navigateAndScroll('payouts')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_payouts">Payouts</a>
+                        <a href="#" onclick="switchView('payouts-page-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_payouts">Payouts</a>
                         <a href="#" onclick="navigateAndScroll('faq')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_faq">FAQ</a>
                     </div>
                     
@@ -190,7 +190,10 @@
                     <a href="#" onclick="switchView('education-view'); toggleHamburgerMenu()" class="px-4 py-3 hover:bg-white/10 rounded-lg flex items-center gap-3 text-sm text-white transition-colors">
                         <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> <span data-i18n="menu_learn">Learn</span>
                     </a>
-                    <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed">
+                    <a href="#" onclick="switchView('payouts-page-view'); toggleHamburgerMenu()" class="px-4 py-3 hover:bg-white/10 rounded-lg flex items-center gap-3 text-sm text-white transition-colors">
+                        <i data-lucide="activity" class="w-4 h-4 text-green-500"></i> <span data-i18n="nav_payouts">Payouts</span>
+                    </a>
+                    <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed border-t border-white/5 mt-1 pt-2">
                         <div class="flex items-center gap-3">
                             <i data-lucide="coins" class="w-4 h-4"></i> <span data-i18n="menu_earn">Earn</span>
                         </div>
@@ -316,7 +319,7 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: PAYOUTS & MEMBERS TRACKING -->
+    <!-- NEW SECTION: PAYOUTS & MEMBERS TRACKING (HOME PREVIEW) -->
     <section id="payouts" class="py-20 relative border-t border-white/5 bg-[#050505]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -331,15 +334,21 @@
                 </div>
             </div>
 
-            <!-- Members Grid injected via JS -->
-            <div id="members-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Javascript will render cards here -->
+            <!-- Members Grid (Limited to 6 via JS) -->
+            <div id="members-container-home" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+                <!-- Javascript will render max 6 cards here -->
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="switchView('payouts-page-view')" class="btn-invert px-8 py-3 text-sm font-medium flex items-center justify-center gap-2 mx-auto shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <span data-i18n="btn_see_all_payouts">See All Payouts</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Detailed Benefits Section -->
-    <section id="benefits" class="py-20 relative border-t border-white/5 bg-offblack">
+    <!-- Social & Community Section -->
+    <section id="community" class="py-20 relative border-t border-white/5 bg-black">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n="social_title">Join Our Public Community</h2>
             <p class="text-gray-400 text-sm font-light mb-12 max-w-xl mx-auto" data-i18n="social_desc">Follow our journey, get free market insights, and stay updated on the latest financial news across our official channels.</p>
@@ -751,6 +760,35 @@
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- PAYOUTS FULL VIEW -->
+    <!-- ========================================== -->
+    <div id="payouts-page-view" class="view-section pt-32 pb-24 min-h-screen bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <button onclick="switchView('home-view')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> <span data-i18n="back_to_home">Back to Home</span>
+            </button>
+
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
+                    All Records
+                </div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-4 text-white" data-i18n="payouts_title_full">All $100 Capital Payouts</h2>
+                <p class="text-gray-400 text-base font-light max-w-2xl mx-auto" data-i18n="payouts_subtitle_full">Complete historical and live tracking of capital allocations for 150 USDTPRO members.</p>
+                <div class="mt-6 flex justify-center gap-6 text-sm text-gray-400 font-mono">
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> 31 Processing</div>
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span> 1 Completed</div>
+                </div>
+            </div>
+
+            <!-- All Members Grid injected via JS -->
+            <div id="all-members-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Javascript will render all cards here -->
+            </div>
+        </div>
+    </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -1053,7 +1091,10 @@
                 about_text_2: "We decided to build the exact opposite. A fortress of transparency. We operate the Premium Invi Group as an elite syndicate where the primary objective is transferring actual, actionable knowledge. When we take a position, we provide the complete chart markup, the exact institutional logic, and the risk parameters. We want you to eventually outgrow us.",
                 
                 payouts_title: "$100 Capital Payouts",
-                payouts_subtitle: "Live tracking of the $100 trading capital withdrawals for our premium 150 USDTPRO members."
+                payouts_subtitle: "Live tracking of the $100 trading capital withdrawals for our premium 150 USDTPRO members.",
+                payouts_title_full: "All $100 Capital Payouts",
+                payouts_subtitle_full: "Complete historical and live tracking of capital allocations for 150 USDTPRO members.",
+                btn_see_all_payouts: "See All Payouts"
             },
             hi: {
                 nav_benefits: "लाभ",
@@ -1146,7 +1187,10 @@
                 about_text_2: "हमने ठीक इसके विपरीत निर्माण करने का निर्णय लिया। पारदर्शिता का किला। हम प्रीमियम इनवी ग्रुप को एक एलीट सिंडिकेट के रूप में संचालित करते हैं जहां प्राथमिक उद्देश्य वास्तविक, कार्रवाई योग्य ज्ञान स्थानांतरित करना है। हम आपको सिग्नल्स के साथ-साथ उनके पीछे का तर्क और चार्ट भी देते हैं।",
 
                 payouts_title: "$100 पूंजी भुगतान",
-                payouts_subtitle: "हमारे प्रीमियम 150 USDTPRO सदस्यों के लिए $100 ट्रेडिंग पूंजी निकासी की लाइव ट्रैकिंग।"
+                payouts_subtitle: "हमारे प्रीमियम 150 USDTPRO सदस्यों के लिए $100 ट्रेडिंग पूंजी निकासी की लाइव ट्रैकिंग।",
+                payouts_title_full: "सभी $100 पूंजी भुगतान",
+                payouts_subtitle_full: "150 USDTPRO सदस्यों के लिए पूंजी आवंटन की पूर्ण ऐतिहासिक और लाइव ट्रैकिंग।",
+                btn_see_all_payouts: "सभी भुगतान देखें"
             }
         };
 
@@ -1358,10 +1402,14 @@
             { name: "Rajesh", status: "Processing" }
         ];
 
-        function renderMembers() {
-            const container = document.getElementById('members-container');
+        function renderMembers(containerId, limit = null) {
+            const container = document.getElementById(containerId);
+            if(!container) return;
+            
             let html = '';
-            membersData.forEach(member => {
+            const dataToRender = limit ? membersData.slice(0, limit) : membersData;
+            
+            dataToRender.forEach(member => {
                 const initial = member.name.charAt(0);
                 const isCompleted = member.status === 'Completed';
                 const borderColor = isCompleted ? 'border-l-green-500 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'border-l-yellow-500 opacity-80 hover:opacity-100';
@@ -1396,7 +1444,8 @@
 
         // Initialize Members on load
         document.addEventListener('DOMContentLoaded', () => {
-            renderMembers();
+            renderMembers('members-container-home', 6); // Only show top 6 on Home Page
+            renderMembers('all-members-container'); // Show all 32 on Payouts Page
             lucide.createIcons();
         });
 
