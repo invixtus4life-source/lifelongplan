@@ -128,23 +128,32 @@
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="flex justify-between items-center h-20 gap-4 lg:gap-8">
-                <!-- Logo -->
-                <div class="flex items-center gap-2 cursor-pointer shrink-0" onclick="switchView('home-view')">
-                    <div class="w-8 h-8 border border-white/20 rounded flex items-center justify-center bg-white/5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+                
+                <div class="flex items-center gap-4 shrink-0">
+                    <!-- Hamburger Menu Button (Three Lines) -->
+                    <button id="hamburger-btn" onclick="toggleHamburgerMenu()" class="text-white hover:text-gray-300 transition-colors p-1">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+
+                    <!-- Logo -->
+                    <div class="flex items-center gap-2 cursor-pointer shrink-0" onclick="switchView('home-view')">
+                        <div class="w-8 h-8 border border-white/20 rounded flex items-center justify-center bg-white/5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 1 0 0-8c-2 0-4 1.33-6 4Z"/></svg>
+                        </div>
+                        <span class="font-semibold text-lg tracking-wide whitespace-nowrap">INVIXTUS</span>
                     </div>
-                    <span class="font-semibold text-lg tracking-wide whitespace-nowrap">INVIXTUS</span>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex items-center flex-1 justify-end gap-6 text-sm">
                     <div class="flex items-center gap-5 xl:gap-8 mr-auto xl:mr-0">
                         <a href="#" onclick="switchView('benefits-page-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_benefits">Benefits</a>
-                        <a href="#" onclick="navigateAndScroll('community')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_community">Community</a>
-                        <a href="#" onclick="navigateAndScroll('results')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_results">Results</a>
+                        <a href="#" onclick="switchView('learn-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_learn">Learn</a>
+                        <a href="#" onclick="switchView('about-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_about">About</a>
                         <a href="#" onclick="switchView('education-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_education">Education</a>
+                        <a href="#" onclick="navigateAndScroll('results')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_results">Results</a>
                         <a href="#" onclick="navigateAndScroll('payouts')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_payouts">Payouts</a>
                         <a href="#" onclick="navigateAndScroll('faq')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_faq">FAQ</a>
                     </div>
@@ -174,6 +183,34 @@
                     <a href="#" onclick="navigateAndScroll('pricing')" class="text-xs border border-white px-3 py-1.5 rounded whitespace-nowrap shrink-0">Join</a>
                 </div>
             </div>
+            
+            <!-- Hamburger Dropdown Menu -->
+            <div id="hamburger-menu" class="absolute top-20 left-4 w-64 bg-[#0a0a0a] border border-white/10 rounded-xl p-2 hidden opacity-0 transition-opacity duration-300 shadow-2xl z-50">
+                <div class="flex flex-col space-y-1">
+                    <a href="#" onclick="switchView('education-view'); toggleHamburgerMenu()" class="px-4 py-3 hover:bg-white/10 rounded-lg flex items-center gap-3 text-sm text-white transition-colors">
+                        <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> <span data-i18n="menu_learn">Learn</span>
+                    </a>
+                    <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="coins" class="w-4 h-4"></i> <span data-i18n="menu_earn">Earn</span>
+                        </div>
+                        <span class="text-[9px] bg-white/5 border border-white/10 px-1.5 py-0.5 rounded uppercase tracking-wider" data-i18n="menu_soon">Soon</span>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="help-circle" class="w-4 h-4"></i> <span data-i18n="menu_help">Help</span>
+                        </div>
+                        <span class="text-[9px] bg-white/5 border border-white/10 px-1.5 py-0.5 rounded uppercase tracking-wider" data-i18n="menu_soon">Soon</span>
+                    </div>
+                    <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="users" class="w-4 h-4"></i> <span data-i18n="menu_community">Community Link</span>
+                        </div>
+                        <span class="text-[9px] bg-white/5 border border-white/10 px-1.5 py-0.5 rounded uppercase tracking-wider" data-i18n="menu_soon">Soon</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </nav>
 
@@ -279,8 +316,8 @@
         </div>
     </section>
 
-    <!-- NEW SECTION: PAYOUTS & MEMBERS TRACKING (MOVED TO HOME) -->
-    <section id="payouts" class="py-20 relative border-t border-white/5 bg-offblack">
+    <!-- NEW SECTION: PAYOUTS & MEMBERS TRACKING -->
+    <section id="payouts" class="py-20 relative border-t border-white/5 bg-[#050505]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
@@ -301,14 +338,14 @@
         </div>
     </section>
 
-    <!-- Social & Community Section -->
-    <section id="community" class="py-20 relative border-t border-white/5 bg-black">
+    <!-- Detailed Benefits Section -->
+    <section id="benefits" class="py-20 relative border-t border-white/5 bg-offblack">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl md:text-3xl font-semibold mb-4" data-i18n="social_title">Join Our Public Community</h2>
             <p class="text-gray-400 text-sm font-light mb-12 max-w-xl mx-auto" data-i18n="social_desc">Follow our journey, get free market insights, and stay updated on the latest financial news across our official channels.</p>
             
             <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                <!-- Instagram -->
+                <!-- Instagram (Hardcoded SVG to guarantee it shows) -->
                 <a href="#" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
                     <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
@@ -317,8 +354,8 @@
                     <span class="text-xs text-gray-500 font-light">@InvixtusOfficial</span>
                 </a>
 
-                <!-- YouTube -->
-                <a href="#" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
+                <!-- YouTube (Hardcoded SVG to guarantee it shows) -->
+                <a href="https://www.youtube.com/@invixtus4life" target="_blank" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
                     <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
                     </div>
@@ -326,7 +363,7 @@
                     <span class="text-xs text-gray-500 font-light">Invixtus Trading</span>
                 </a>
 
-                <!-- Telegram -->
+                <!-- Telegram (Hardcoded SVG to guarantee it shows) -->
                 <a href="https://t.me/ngltraders" target="_blank" class="w-full md:w-auto glass-panel p-6 flex flex-col items-center justify-center card-hover group min-w-[200px]">
                     <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-gray-300 group-hover:text-black transition-colors"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
@@ -524,9 +561,8 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Video Module 1 -->
                 <div class="glass-panel p-4 card-hover">
-                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group border border-white/10">
-                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50 group-hover:text-white transition-colors z-10"></i>
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 overflow-hidden border border-white/10 relative">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/psQS2iX5N2k?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                     <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase mb-2 block">Module 1</span>
                     <h3 class="text-lg font-medium mb-2 text-white">Smart Money Concepts A-Z</h3>
@@ -535,9 +571,8 @@
 
                 <!-- Video Module 2 -->
                 <div class="glass-panel p-4 card-hover">
-                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group border border-white/10">
-                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50 group-hover:text-white transition-colors z-10"></i>
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 overflow-hidden border border-white/10 relative">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/psQS2iX5N2k?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                     <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase mb-2 block">Module 2</span>
                     <h3 class="text-lg font-medium mb-2 text-white">Advanced Risk Management</h3>
@@ -546,9 +581,8 @@
 
                 <!-- Video Module 3 -->
                 <div class="glass-panel p-4 card-hover">
-                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group border border-white/10">
-                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50 group-hover:text-white transition-colors z-10"></i>
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1621504450181-5d156f063316?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 overflow-hidden border border-white/10 relative">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/jEGc_2dM5YY?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                     <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase mb-2 block">Module 3</span>
                     <h3 class="text-lg font-medium mb-2 text-white">Crypto On-Chain Analysis</h3>
@@ -557,9 +591,8 @@
 
                 <!-- Video Module 4 -->
                 <div class="glass-panel p-4 card-hover">
-                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group border border-white/10">
-                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50 group-hover:text-white transition-colors z-10"></i>
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 overflow-hidden border border-white/10 relative">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Elg1cSF_A7U?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                     <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase mb-2 block">Module 4</span>
                     <h3 class="text-lg font-medium mb-2 text-white">BankNifty Expiry Strategies</h3>
@@ -568,9 +601,8 @@
 
                 <!-- Video Module 5 -->
                 <div class="glass-panel p-4 card-hover">
-                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden group border border-white/10">
-                        <i data-lucide="play-circle" class="w-12 h-12 text-white/50 group-hover:text-white transition-colors z-10"></i>
-                        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop')] bg-cover bg-center opacity-20 group-hover:opacity-40 transition-opacity"></div>
+                    <div class="w-full aspect-video bg-white/5 rounded-lg mb-4 overflow-hidden border border-white/10 relative">
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/UxtzZ8cYk4A?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="absolute inset-0 w-full h-full"></iframe>
                     </div>
                     <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase mb-2 block">Module 5</span>
                     <h3 class="text-lg font-medium mb-2 text-white">Trading Psychology & Mindset</h3>
@@ -590,6 +622,135 @@
         </div>
     </div>
 
+    <!-- ========================================== -->
+    <!-- LEARN VIEW (CURRICULUM) -->
+    <!-- ========================================== -->
+    <div id="learn-view" class="view-section pt-32 pb-24 min-h-screen bg-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <button onclick="switchView('home-view')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> <span data-i18n="back_to_home">Back to Home</span>
+            </button>
+
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
+                    Step-by-Step Pathway
+                </div>
+                <h2 class="text-3xl md:text-4xl font-semibold mb-4 text-white" data-i18n="learn_title">Trading Curriculum</h2>
+                <p class="text-gray-400 text-base font-light max-w-2xl mx-auto" data-i18n="learn_subtitle">A structured learning path from absolute beginner to institutional trader. Stop guessing and start executing with precision.</p>
+            </div>
+
+            <div class="relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Phase 1 -->
+                    <div class="relative z-10">
+                        <div class="w-24 h-24 rounded-full border border-white/20 bg-[#0a0a0a] flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                            <i data-lucide="compass" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <div class="glass-panel p-6 text-center card-hover h-full">
+                            <h3 class="text-lg font-medium text-white mb-2 uppercase tracking-widest">Phase 1: Foundation</h3>
+                            <p class="text-[10px] text-gray-500 font-mono mb-4 uppercase">Weeks 1-2</p>
+                            <ul class="space-y-3 text-sm text-gray-400 font-light text-left">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Market Terminology & Basics</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Broker Setup & Platform Navigation</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Candlestick Anatomy & Price Action</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Understanding Lot Sizes & Margins</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="relative z-10">
+                        <div class="w-24 h-24 rounded-full border border-white/20 bg-[#0a0a0a] flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                            <i data-lucide="bar-chart-2" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <div class="glass-panel p-6 text-center card-hover h-full">
+                            <h3 class="text-lg font-medium text-white mb-2 uppercase tracking-widest">Phase 2: Strategy</h3>
+                            <p class="text-[10px] text-gray-500 font-mono mb-4 uppercase">Weeks 3-6</p>
+                            <ul class="space-y-3 text-sm text-gray-400 font-light text-left">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Smart Money Concepts (SMC) Intro</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Identifying Institutional Order Blocks</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Liquidity Sweeps & Inducements</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Multi-Timeframe Analysis Alignment</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="relative z-10">
+                        <div class="w-24 h-24 rounded-full border border-white/20 bg-[#0a0a0a] flex items-center justify-center mx-auto mb-6 shadow-[0_0_20px_rgba(255,255,255,0.05)]">
+                            <i data-lucide="activity" class="w-8 h-8 text-white"></i>
+                        </div>
+                        <div class="glass-panel p-6 text-center card-hover h-full">
+                            <h3 class="text-lg font-medium text-white mb-2 uppercase tracking-widest">Phase 3: Mastery</h3>
+                            <p class="text-[10px] text-gray-500 font-mono mb-4 uppercase">Weeks 7-12+</p>
+                            <ul class="space-y-3 text-sm text-gray-400 font-light text-left">
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Deep Dive into Trading Psychology</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Strict Risk Management Frameworks</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Building a Custom Trading Plan</li>
+                                <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-green-400 shrink-0 mt-0.5"></i> Prop Firm Passing Strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <button onclick="navigateAndScroll('pricing')" class="btn-invert px-8 py-3.5 text-sm font-medium">
+                    Start Learning Today
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ABOUT VIEW (OUR PHILOSOPHY) -->
+    <!-- ========================================== -->
+    <div id="about-view" class="view-section pt-32 pb-24 min-h-screen bg-black">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <button onclick="switchView('home-view')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium mb-10 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> <span data-i18n="back_to_home">Back to Home</span>
+            </button>
+
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-semibold mb-6 text-white" data-i18n="about_title">Our Philosophy</h2>
+                <div class="w-16 h-1 bg-white mx-auto mb-6"></div>
+            </div>
+
+            <div class="glass-panel p-8 md:p-12 border border-white/10 mb-12 text-center md:text-left">
+                <p class="text-lg md:text-xl text-gray-300 font-light leading-relaxed mb-6" data-i18n="about_text_1">
+                    "INVIXTUS was born out of frustration. We saw a trading industry flooded with fake gurus, manipulated screenshots, and blind signal groups that intentionally kept their members uneducated to keep them dependent."
+                </p>
+                <p class="text-gray-400 text-sm md:text-base font-light leading-relaxed" data-i18n="about_text_2">
+                    We decided to build the exact opposite. A fortress of transparency. We operate the Premium Invi Group as an elite syndicate where the primary objective is transferring actual, actionable knowledge. When we take a position on EUR/USD or BankNifty, we don't just tell you the entry price—we provide the complete chart markup, the exact institutional logic, and the risk parameters. We want you to eventually outgrow us. That is true success.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-[#0a0a0a] border border-white/5 rounded-xl p-8">
+                    <i data-lucide="eye" class="w-8 h-8 text-white mx-auto mb-4"></i>
+                    <h4 class="text-lg font-medium text-white mb-2">Total Transparency</h4>
+                    <p class="text-xs text-gray-500 font-light">We post our wins, but more importantly, we breakdown our losses so everyone learns.</p>
+                </div>
+                <div class="bg-[#0a0a0a] border border-white/5 rounded-xl p-8">
+                    <i data-lucide="shield-alert" class="w-8 h-8 text-white mx-auto mb-4"></i>
+                    <h4 class="text-lg font-medium text-white mb-2">Preservation First</h4>
+                    <p class="text-xs text-gray-500 font-light">Capital preservation overrides profit generation. Defense always wins the championship.</p>
+                </div>
+                <div class="bg-[#0a0a0a] border border-white/5 rounded-xl p-8">
+                    <i data-lucide="users" class="w-8 h-8 text-white mx-auto mb-4"></i>
+                    <h4 class="text-lg font-medium text-white mb-2">The Syndicate</h4>
+                    <p class="text-xs text-gray-500 font-light">A highly curated group of serious operators. No noise, no spam, just pure alpha.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -605,7 +766,7 @@
                     <a href="#" class="text-gray-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                     </a>
-                    <a href="#" class="text-gray-500 hover:text-white transition-colors">
+                    <a href="https://www.youtube.com/@invixtus4life" target="_blank" class="text-gray-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
                     </a>
                     <a href="https://t.me/ngltraders" target="_blank" class="text-gray-500 hover:text-white transition-colors">
@@ -806,6 +967,8 @@
                 nav_community: "Community",
                 nav_results: "Results",
                 nav_education: "Education",
+                nav_learn: "Learn",
+                nav_about: "About Us",
                 nav_payouts: "Payouts",
                 nav_faq: "FAQ",
                 nav_join: "Join Elite",
@@ -872,9 +1035,22 @@
                 modal_btn: "I have sent the payment",
                 modal_footer: "Proceed to Telegram (@ngltraders) for verification.",
 
+                menu_learn: "Learn",
+                menu_earn: "Earn",
+                menu_help: "Help",
+                menu_community: "Community Link",
+                menu_soon: "Soon",
+
                 back_to_home: "Back to Home",
                 edu_page_title: "Educational Masterclasses",
                 edu_page_subtitle: "Here is exactly what you are getting inside the Premium Invi Group. Over 50+ hours of exclusive YouTube masterclasses.",
+                
+                learn_title: "Trading Curriculum",
+                learn_subtitle: "A structured learning path from absolute beginner to institutional trader. Stop guessing and start executing with precision.",
+                
+                about_title: "Our Philosophy",
+                about_text_1: "\"INVIXTUS was born out of frustration. We saw a trading industry flooded with fake gurus, manipulated screenshots, and blind signal groups that intentionally kept their members uneducated to keep them dependent.\"",
+                about_text_2: "We decided to build the exact opposite. A fortress of transparency. We operate the Premium Invi Group as an elite syndicate where the primary objective is transferring actual, actionable knowledge. When we take a position, we provide the complete chart markup, the exact institutional logic, and the risk parameters. We want you to eventually outgrow us.",
                 
                 payouts_title: "$100 Capital Payouts",
                 payouts_subtitle: "Live tracking of the $100 trading capital withdrawals for our premium 150 USDTPRO members."
@@ -884,6 +1060,8 @@
                 nav_community: "समुदाय",
                 nav_results: "परिणाम",
                 nav_education: "शिक्षा",
+                nav_learn: "सीखें (Learn)",
+                nav_about: "हमारे बारे में",
                 nav_payouts: "भुगतान (Payouts)",
                 nav_faq: "सामान्य प्रश्न",
                 nav_join: "एलीट से जुड़ें",
@@ -950,9 +1128,22 @@
                 modal_btn: "मैंने भुगतान कर दिया है",
                 modal_footer: "सत्यापन के लिए टेलीग्राम (@ngltraders) पर जाएं।",
 
+                menu_learn: "सीखें (Learn)",
+                menu_earn: "कमाएं (Earn)",
+                menu_help: "मदद (Help)",
+                menu_community: "समुदाय लिंक",
+                menu_soon: "जल्द",
+
                 back_to_home: "होम पर वापस जाएं",
                 edu_page_title: "शैक्षिक मास्टरक्लास",
                 edu_page_subtitle: "यहां वह सब है जो आपको प्रीमियम इनवी ग्रुप के अंदर मिल रहा है। 50+ से अधिक घंटे के विशेष YouTube मास्टरक्लास।",
+
+                learn_title: "ट्रेडिंग पाठ्यक्रम",
+                learn_subtitle: "पूर्ण शुरुआत से संस्थागत ट्रेडर तक एक संरचित सीखने का मार्ग। अनुमान लगाना बंद करें और सटीकता के साथ व्यापार शुरू करें।",
+                
+                about_title: "हमारा दर्शन (Our Philosophy)",
+                about_text_1: "\"INVIXTUS का जन्म हताशा से हुआ था। हमने फर्जी गुरुओं और अंधे सिग्नल समूहों से भरा एक व्यापारिक उद्योग देखा, जो जानबूझकर अपने सदस्यों को निर्भर रखने के लिए अशिक्षित रखते थे।\"",
+                about_text_2: "हमने ठीक इसके विपरीत निर्माण करने का निर्णय लिया। पारदर्शिता का किला। हम प्रीमियम इनवी ग्रुप को एक एलीट सिंडिकेट के रूप में संचालित करते हैं जहां प्राथमिक उद्देश्य वास्तविक, कार्रवाई योग्य ज्ञान स्थानांतरित करना है। हम आपको सिग्नल्स के साथ-साथ उनके पीछे का तर्क और चार्ट भी देते हैं।",
 
                 payouts_title: "$100 पूंजी भुगतान",
                 payouts_subtitle: "हमारे प्रीमियम 150 USDTPRO सदस्यों के लिए $100 ट्रेडिंग पूंजी निकासी की लाइव ट्रैकिंग।"
@@ -1099,6 +1290,35 @@
                 }, 500);
             }, 1000);
         }
+
+        // ==========================================
+        // Hamburger Menu Logic
+        // ==========================================
+        function toggleHamburgerMenu() {
+            const menu = document.getElementById('hamburger-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                setTimeout(() => {
+                    menu.classList.remove('opacity-0');
+                }, 10);
+            } else {
+                menu.classList.add('opacity-0');
+                setTimeout(() => {
+                    menu.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('hamburger-menu');
+            const btn = document.getElementById('hamburger-btn');
+            if (menu && btn) {
+                if (!menu.classList.contains('hidden') && !menu.contains(event.target) && !btn.contains(event.target)) {
+                    toggleHamburgerMenu();
+                }
+            }
+        });
 
         // ==========================================
         // Payouts & Members Logic
