@@ -154,7 +154,6 @@
                         <a href="#" onclick="switchView('about-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_about">About</a>
                         <a href="#" onclick="switchView('education-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_education">Education</a>
                         <a href="#" onclick="navigateAndScroll('results')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_results">Results</a>
-                        <a href="#" onclick="switchView('payouts-page-view')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_payouts">Payouts</a>
                         <a href="#" onclick="navigateAndScroll('faq')" class="text-gray-400 hover:text-white transition-colors whitespace-nowrap" data-i18n="nav_faq">FAQ</a>
                     </div>
                     
@@ -189,9 +188,6 @@
                 <div class="flex flex-col space-y-1">
                     <a href="#" onclick="switchView('education-view'); toggleHamburgerMenu()" class="px-4 py-3 hover:bg-white/10 rounded-lg flex items-center gap-3 text-sm text-white transition-colors">
                         <i data-lucide="youtube" class="w-4 h-4 text-red-500"></i> <span data-i18n="menu_learn">Learn</span>
-                    </a>
-                    <a href="#" onclick="switchView('payouts-page-view'); toggleHamburgerMenu()" class="px-4 py-3 hover:bg-white/10 rounded-lg flex items-center gap-3 text-sm text-white transition-colors">
-                        <i data-lucide="activity" class="w-4 h-4 text-green-500"></i> <span data-i18n="nav_payouts">Payouts</span>
                     </a>
                     <div class="px-4 py-3 flex items-center justify-between text-sm text-gray-500 cursor-not-allowed border-t border-white/5 mt-1 pt-2">
                         <div class="flex items-center gap-3">
@@ -262,26 +258,6 @@
         </div>
     </section>
 
-    <!-- SPECIAL OFFER BANNER (HOME PAGE) -->
-    <section class="py-12 relative bg-[#050505]">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="glass-panel p-8 md:p-12 text-center border-2 border-white/20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-black to-black relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none"></div>
-                <i data-lucide="banknote" class="w-12 h-12 text-white mx-auto mb-5"></i>
-                <h3 class="text-2xl md:text-4xl font-semibold text-white mb-3 tracking-wide uppercase" data-i18n="home_special_offer">
-                    WITHDRAWAL OF 100$ FROM LONG ASIA WITH 150 USDT PRO
-                </h3>
-                <p class="text-gray-400 text-sm md:text-base font-light mt-2 max-w-2xl mx-auto" data-i18n="home_special_offer_desc">
-                    An exclusive, high-value opportunity for our members. Secure this specific benefit by selecting the 150 USDTPRO tier during checkout.
-                </p>
-
-                <button onclick="navigateAndScroll('pricing')" class="mt-8 border border-white text-white hover:bg-white hover:text-black transition-colors px-8 py-3 rounded text-sm font-semibold uppercase tracking-widest" data-i18n="btn_claim_offer">
-                    Claim Offer Now
-                </button>
-            </div>
-        </div>
-    </section>
-
     <!-- NEW SECTION: Results / Track Record -->
     <section id="results" class="py-20 relative border-t border-white/5 bg-black">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -315,34 +291,6 @@
                     <p class="text-gray-300 text-xs mb-4">Early Access</p>
                     <p class="text-gray-500 text-xs font-light">Shared seed round whitelist access for an AI Layer-2 chain.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW SECTION: PAYOUTS & MEMBERS TRACKING (HOME PREVIEW) -->
-    <section id="payouts" class="py-20 relative border-t border-white/5 bg-[#050505]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
-                    Live Tracking
-                </div>
-                <h2 class="text-3xl md:text-4xl font-semibold mb-4 text-white" data-i18n="payouts_title">$100 Capital Payouts</h2>
-                <p class="text-gray-400 text-base font-light max-w-2xl mx-auto" data-i18n="payouts_subtitle">Live tracking of the $100 trading capital withdrawals for our premium 150 USDTPRO members.</p>
-                <div class="mt-6 flex justify-center gap-6 text-sm text-gray-400 font-mono">
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> 31 Processing</div>
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span> 1 Completed</div>
-                </div>
-            </div>
-
-            <!-- Members Grid (Limited to 6 via JS) -->
-            <div id="members-container-home" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-                <!-- Javascript will render max 6 cards here -->
-            </div>
-
-            <div class="mt-12 text-center">
-                <button onclick="switchView('payouts-page-view')" class="btn-invert px-8 py-3 text-sm font-medium flex items-center justify-center gap-2 mx-auto shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                    <span data-i18n="btn_see_all_payouts">See All Payouts</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
             </div>
         </div>
     </section>
@@ -481,72 +429,54 @@
                 <p class="text-gray-400 text-base font-light max-w-2xl mx-auto" data-i18n="benefits_subtitle">Everything you unlock with your 108 USDTPRO one-time lifetime fee. No hidden fees, just pure alpha.</p>
             </div>
 
-            <!-- Special Capital Offer Highlight -->
-            <div class="glass-panel p-8 md:p-10 mb-12 border-2 border-white/20 relative overflow-hidden bg-[#070707]">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[80px] pointer-events-none"></div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
-                    <div class="w-full md:w-1/3 flex justify-center">
-                        <div class="w-32 h-32 rounded-full border border-white/20 bg-white/5 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.05)]">
-                            <i data-lucide="gift" class="w-12 h-12 text-white"></i>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-2/3 text-center md:text-left">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest" data-i18n="special_offer_badge">
-                            Special Member Offer
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-semibold text-white mb-4" data-i18n="special_offer_title">Get $100 Trading Capital for 150 USDTPRO</h3>
-                        <p class="text-gray-400 text-sm font-light leading-relaxed mb-6" data-i18n="special_offer_desc">
-                            Supercharge your trading journey. As an exclusive benefit for Invixtus members, you can unlock a $100 trading credit/capital allocation by depositing just 150 USDTPRO.
-                        </p>
-
-                        <p class="text-gray-500 text-xs font-light border-l-2 border-white/20 pl-3" data-i18n="special_offer_note">
-                            *Important: This is an optional premium add-on. Your core lifetime subscription fee is strictly 108 USDTPRO, which must be paid separately to join the group.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Benefit 1 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="crown" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b1_title">Premium Invi Group</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b1_desc">Direct entry into our highly guarded community of professional traders. Network, share charts, and grow alongside the best.</p>
+                    <i data-lucide="user-check" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b1_title">1-on-1 Mentorship</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b1_desc">Get personal 1-to-1 help and guidance directly from a professional technical analyst.</p>
                 </div>
 
                 <!-- Benefit 2 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="target" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b2_title">Institutional Signals</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b2_desc">High-probability setups for Forex, Indian Equities, and Crypto, complete with exact Entry, Stop Loss, and Take Profit levels.</p>
+                    <i data-lucide="briefcase" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b2_title">New Business Plans</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b2_desc">Exclusive insights and strategic plans for scaling new business ventures and income streams.</p>
                 </div>
 
                 <!-- Benefit 3 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="book-open" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b3_title">Resource Library</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b3_desc">Access hundreds of hours of recorded masterclasses covering Smart Money Concepts (SMC), Price Action, and Order Blocks.</p>
+                    <i data-lucide="users" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b3_title">Strong Community</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b3_desc">Join an elite, highly active network of dedicated traders. Network, grow, and succeed together.</p>
                 </div>
 
                 <!-- Benefit 4 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="radar" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b4_title">Early Project Radar</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b4_desc">Get alpha on upcoming Web3 projects, Crypto IDOs, and new Indian IPOs before they hit mainstream retail media.</p>
+                    <i data-lucide="coins" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b4_title">Earning Methods</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b4_desc">Discover multiple diversified earning methods and proven strategies beyond traditional trading.</p>
                 </div>
 
                 <!-- Benefit 5 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="brain-circuit" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b5_title">Trading Psychology</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b5_desc">Master your mind. Learn how to handle losses, control FOMO, and maintain the discipline required for consistent profitability.</p>
+                    <i data-lucide="line-chart" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b5_title">Self Trades</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b5_desc">High-probability setups and institutional signals empowering you to confidently execute your own trades.</p>
                 </div>
 
                 <!-- Benefit 6 -->
                 <div class="glass-panel p-8 card-hover">
-                    <i data-lucide="shield" class="w-6 h-6 text-white mb-5"></i>
-                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b6_title">Risk Management</h3>
-                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b6_desc">Plug-and-play position sizing calculators and rulesets to ensure you never blow an account and always protect your capital.</p>
+                    <i data-lucide="bot" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b6_title">Bot Trading Plan</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b6_desc">Access automated trading strategies and reliable bot configurations for passive market participation.</p>
+                </div>
+
+                <!-- Benefit 7 -->
+                <div class="glass-panel p-8 card-hover">
+                    <i data-lucide="copy" class="w-6 h-6 text-white mb-5"></i>
+                    <h3 class="text-lg font-medium mb-2 text-white" data-i18n="b7_title">Copy Trading Project</h3>
+                    <p class="text-gray-400 text-sm font-light leading-relaxed" data-i18n="b7_desc">Mirror the exact trades of our top-performing professionals through our upcoming copy trading initiatives.</p>
                 </div>
             </div>
         </div>
@@ -760,35 +690,6 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- PAYOUTS FULL VIEW -->
-    <!-- ========================================== -->
-    <div id="payouts-page-view" class="view-section pt-32 pb-24 min-h-screen bg-black">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <button onclick="switchView('home-view')" class="flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium mb-10 transition-colors">
-                <i data-lucide="arrow-left" class="w-4 h-4"></i> <span data-i18n="back_to_home">Back to Home</span>
-            </button>
-
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-3 py-1 border border-white/10 bg-white/5 rounded text-white text-[10px] font-bold mb-4 uppercase tracking-widest">
-                    All Records
-                </div>
-                <h2 class="text-3xl md:text-4xl font-semibold mb-4 text-white" data-i18n="payouts_title_full">All $100 Capital Payouts</h2>
-                <p class="text-gray-400 text-base font-light max-w-2xl mx-auto" data-i18n="payouts_subtitle_full">Complete historical and live tracking of capital allocations for 150 USDTPRO members.</p>
-                <div class="mt-6 flex justify-center gap-6 text-sm text-gray-400 font-mono">
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500 animate-pulse"></span> 31 Processing</div>
-                    <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></span> 1 Completed</div>
-                </div>
-            </div>
-
-            <!-- All Members Grid injected via JS -->
-            <div id="all-members-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <!-- Javascript will render all cards here -->
-            </div>
-        </div>
-    </div>
-
     </main>
 
     <!-- FOOTER -->
@@ -923,44 +824,6 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- TRANSACTION DETAILS MODAL OVERLAY -->
-    <!-- ========================================== -->
-    <div id="tx-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
-        <div id="tx-modal-content" class="bg-darkgray border border-white/10 w-full max-w-sm rounded-xl p-6 shadow-2xl relative scale-95 transition-transform duration-300">
-            <button onclick="closeTxModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            
-            <div class="text-center mb-6 pt-2">
-                <div class="w-12 h-12 rounded-full border border-green-500/30 flex items-center justify-center mx-auto mb-4 bg-green-500/10 text-green-500 shadow-[0_0_15px_rgba(34,197,94,0.15)]">
-                    <i data-lucide="check-circle" class="w-6 h-6"></i>
-                </div>
-                <h3 class="text-lg font-medium text-white mb-1">Transfer Successful</h3>
-                <p class="text-gray-400 text-xs font-light">Withdrawal completed to <span id="tx-member-name" class="text-white font-medium"></span>.</p>
-            </div>
-
-            <div class="space-y-3 bg-black border border-white/10 rounded-lg p-4 mb-6">
-                <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                    <span class="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Amount</span>
-                    <span class="text-sm font-mono text-green-400 font-semibold">$100.00</span>
-                </div>
-                <div class="flex justify-between items-center border-b border-white/5 pb-2">
-                    <span class="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Asset</span>
-                    <span class="text-xs font-mono text-white">USDTBEP20</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Tx Hash</span>
-                    <span class="text-[10px] font-mono text-gray-400 truncate max-w-[120px]">0x7F2a8b...94Ec</span>
-                </div>
-            </div>
-
-            <button onclick="closeTxModal()" class="w-full btn-invert py-2.5 rounded-lg text-sm font-medium transition-all shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                Close Details
-            </button>
-        </div>
-    </div>
-
     <script>
         // Initialize Icons
         lucide.createIcons();
@@ -1007,7 +870,6 @@
                 nav_education: "Education",
                 nav_learn: "Learn",
                 nav_about: "About Us",
-                nav_payouts: "Payouts",
                 nav_faq: "FAQ",
                 nav_join: "Join Elite",
                 hero_badge: "Knowledge is the Ultimate Edge",
@@ -1015,32 +877,26 @@
                 hero_subtitle: "We bridge the gap between blind signals and actual market mastery. Gain access to the exclusive Premium Invi Group, high-probability setups, and extensive education.",
                 btn_claim: "Claim Lifetime Access",
                 btn_benefits: "Explore Benefits",
-                
-                home_special_offer: "WITHDRAWAL OF 100$ FROM LONG ASIA WITH 150 USDT PRO",
-                home_special_offer_desc: "An exclusive, high-value opportunity for our members. Secure this specific benefit by selecting the 150 USDTPRO tier during checkout.",
-                btn_claim_offer: "Claim Offer Now",
 
                 results_title: "Recent Performance",
                 results_subtitle: "Transparency is our core value. Here are some of the recent setups shared in the Premium Invi Group.",
                 
                 benefits_title: "Premium Invi Group Features",
                 benefits_subtitle: "Everything you unlock with your 108 USDTPRO one-time lifetime fee. No hidden fees, just pure alpha.",
-                special_offer_badge: "Special Member Offer",
-                special_offer_title: "Get $100 Trading Capital for 150 USDTPRO",
-                special_offer_desc: "Supercharge your trading journey. As an exclusive benefit for Invixtus members, you can unlock a $100 trading credit/capital allocation by depositing just 150 USDTPRO.",
-                special_offer_note: "*Important: This is an optional premium add-on. Your core lifetime subscription fee is strictly 108 USDTPRO, which must be paid separately to join the group.",
-                b1_title: "Premium Invi Group",
-                b1_desc: "Direct entry into our highly guarded community of professional traders. Network, share charts, and grow alongside the best.",
-                b2_title: "Institutional Signals",
-                b2_desc: "High-probability setups for Forex, Indian Equities, and Crypto, complete with exact Entry, Stop Loss, and Take Profit levels.",
-                b3_title: "Resource Library",
-                b3_desc: "Access hundreds of hours of recorded masterclasses covering Smart Money Concepts (SMC), Price Action, and Order Blocks.",
-                b4_title: "Early Project Radar",
-                b4_desc: "Get alpha on upcoming Web3 projects, Crypto IDOs, and new Indian IPOs before they hit mainstream retail media.",
-                b5_title: "Trading Psychology",
-                b5_desc: "Master your mind. Learn how to handle losses, control FOMO, and maintain the discipline required for consistent profitability.",
-                b6_title: "Risk Management",
-                b6_desc: "Plug-and-play position sizing calculators and rulesets to ensure you never blow an account and always protect your capital.",
+                b1_title: "1-on-1 Mentorship",
+                b1_desc: "Get personal 1-to-1 help and guidance directly from a professional technical analyst.",
+                b2_title: "New Business Plans",
+                b2_desc: "Exclusive insights and strategic plans for scaling new business ventures and income streams.",
+                b3_title: "Strong Community",
+                b3_desc: "Join an elite, highly active network of dedicated traders. Network, grow, and succeed together.",
+                b4_title: "Earning Methods",
+                b4_desc: "Discover multiple diversified earning methods and proven strategies beyond traditional trading.",
+                b5_title: "Self Trades",
+                b5_desc: "High-probability setups and institutional signals empowering you to confidently execute your own trades.",
+                b6_title: "Bot Trading Plan",
+                b6_desc: "Access automated trading strategies and reliable bot configurations for passive market participation.",
+                b7_title: "Copy Trading Project",
+                b7_desc: "Mirror the exact trades of our top-performing professionals through our upcoming copy trading initiatives.",
                 social_title: "Join Our Public Community",
                 social_desc: "Follow our journey, get free market insights, and stay updated on the latest financial news across our official channels.",
                 
@@ -1088,13 +944,7 @@
                 
                 about_title: "Our Philosophy",
                 about_text_1: "\"INVIXTUS was born out of frustration. We saw a trading industry flooded with fake gurus, manipulated screenshots, and blind signal groups that intentionally kept their members uneducated to keep them dependent.\"",
-                about_text_2: "We decided to build the exact opposite. A fortress of transparency. We operate the Premium Invi Group as an elite syndicate where the primary objective is transferring actual, actionable knowledge. When we take a position, we provide the complete chart markup, the exact institutional logic, and the risk parameters. We want you to eventually outgrow us.",
-                
-                payouts_title: "$100 Capital Payouts",
-                payouts_subtitle: "Live tracking of the $100 trading capital withdrawals for our premium 150 USDTPRO members.",
-                payouts_title_full: "All $100 Capital Payouts",
-                payouts_subtitle_full: "Complete historical and live tracking of capital allocations for 150 USDTPRO members.",
-                btn_see_all_payouts: "See All Payouts"
+                about_text_2: "We decided to build the exact opposite. A fortress of transparency. We operate the Premium Invi Group as an elite syndicate where the primary objective is transferring actual, actionable knowledge. When we take a position, we provide the complete chart markup, the exact institutional logic, and the risk parameters. We want you to eventually outgrow us."
             },
             hi: {
                 nav_benefits: "लाभ",
@@ -1103,7 +953,6 @@
                 nav_education: "शिक्षा",
                 nav_learn: "सीखें (Learn)",
                 nav_about: "हमारे बारे में",
-                nav_payouts: "भुगतान (Payouts)",
                 nav_faq: "सामान्य प्रश्न",
                 nav_join: "एलीट से जुड़ें",
                 hero_badge: "ज्ञान ही अंतिम बढ़त है",
@@ -1111,32 +960,26 @@
                 hero_subtitle: "हम अंधे सिग्नल्स और वास्तविक बाजार महारत के बीच की खाई को पाटते हैं। प्रीमियम इनवी ग्रुप (Invi Group), उच्च-संभावना वाले सेटअप और व्यापक शिक्षा तक पहुंच प्राप्त करें।",
                 btn_claim: "आजीवन पहुंच प्राप्त करें",
                 btn_benefits: "लाभ देखें",
-                
-                home_special_offer: "150 USDT PRO के साथ LONG ASIA से 100$ की निकासी",
-                home_special_offer_desc: "हमारे सदस्यों के लिए एक विशेष अवसर। चेकआउट के दौरान 150 USDTPRO टियर का चयन करके इस विशिष्ट लाभ को सुरक्षित करें।",
-                btn_claim_offer: "अभी ऑफर का दावा करें",
 
                 results_title: "हाल का प्रदर्शन",
                 results_subtitle: "पारदर्शिता हमारा मूल मूल्य है। प्रीमियम इनवी ग्रुप में साझा किए गए कुछ हालिया सेटअप यहां दिए गए हैं।",
                 
                 benefits_title: "प्रीमियम इनवी ग्रुप की विशेषताएं",
                 benefits_subtitle: "108 USDTPRO आजीवन शुल्क के साथ आप जो कुछ भी अनलॉक करते हैं। कोई छिपा हुआ शुल्क नहीं।",
-                special_offer_badge: "विशेष सदस्य प्रस्ताव",
-                special_offer_title: "150 USDTPRO के लिए $100 ट्रेडिंग कैपिटल प्राप्त करें",
-                special_offer_desc: "अपनी ट्रेडिंग यात्रा को सुपरचार्ज करें। इनविक्टस सदस्यों के लिए एक विशेष लाभ के रूप में, आप केवल 150 USDTPRO जमा करके $100 ट्रेडिंग क्रेडिट/पूंजी आवंटन अनलॉक कर सकते हैं।",
-                special_offer_note: "*महत्वपूर्ण: यह एक वैकल्पिक प्रीमियम ऐड-ऑन है। आपका मुख्य आजीवन सदस्यता शुल्क सख्ती से 108 USDTPRO है, जिसे समूह में शामिल होने के लिए अलग से भुगतान किया जाना चाहिए।",
-                b1_title: "प्रीमियम इनवी ग्रुप",
-                b1_desc: "पेशेवर ट्रेडर्स के हमारे समुदाय में सीधा प्रवेश। नेटवर्क बनाएं, चार्ट साझा करें और सर्वश्रेष्ठ के साथ बढ़ें।",
-                b2_title: "संस्थागत सिग्नल्स",
-                b2_desc: "विदेशी मुद्रा, भारतीय इक्विटी और क्रिप्टो के लिए उच्च-संभावना सेटअप, सटीक प्रवेश, स्टॉप लॉस और टेक प्रॉफिट स्तर के साथ।",
-                b3_title: "संसाधन पुस्तकालय",
-                b3_desc: "स्मार्ट मनी कॉन्सेप्ट्स (SMC), प्राइस एक्शन और ऑर्डर ब्लॉक्स को कवर करने वाली रिकॉर्डेड मास्टरक्लास तक पहुंच।",
-                b4_title: "प्रोजेक्ट रडार",
-                b4_desc: "आगामी Web3 प्रोजेक्ट्स, क्रिप्टो IDO और नए भारतीय IPO पर मुख्यधारा की मीडिया में आने से पहले जानकारी प्राप्त करें।",
-                b5_title: "ट्रेडिंग मनोविज्ञान",
-                b5_desc: "अपने दिमाग पर नियंत्रण पाएं। नुकसान को संभालना, FOMO को नियंत्रित करना और लाभप्रदता के लिए आवश्यक अनुशासन बनाए रखना सीखें।",
-                b6_title: "जोखिम प्रबंधन",
-                b6_desc: "स्थिति आकार कैलकुलेटर और नियम यह सुनिश्चित करने के लिए कि आप अपनी पूंजी की हमेशा रक्षा करें।",
+                b1_title: "1-ऑन-1 मेंटरशिप",
+                b1_desc: "एक पेशेवर तकनीकी विश्लेषक से सीधे व्यक्तिगत 1-टू-1 सहायता और मार्गदर्शन प्राप्त करें।",
+                b2_title: "नई व्यावसायिक योजनाएँ",
+                b2_desc: "नए व्यावसायिक उपक्रमों और आय के स्रोतों को बढ़ाने के लिए विशेष अंतर्दृष्टि और रणनीतिक योजनाएँ।",
+                b3_title: "मजबूत समुदाय",
+                b3_desc: "समर्पित ट्रेडर्स के एक एलीट नेटवर्क में शामिल हों। एक साथ नेटवर्क बनाएं, बढ़ें और सफल हों।",
+                b4_title: "कमाई के तरीके",
+                b4_desc: "पारंपरिक ट्रेडिंग से परे कई विविध कमाई के तरीकों और सिद्ध रणनीतियों की खोज करें।",
+                b5_title: "सेल्फ ट्रेड्स",
+                b5_desc: "उच्च-संभावना वाले सेटअप और संस्थागत संकेत जो आपको अपने स्वयं के ट्रेडों को आत्मविश्वास से करने के लिए सशक्त बनाते हैं।",
+                b6_title: "बॉट ट्रेडिंग योजना",
+                b6_desc: "निष्क्रिय बाजार भागीदारी के लिए स्वचालित ट्रेडिंग रणनीतियों और विश्वसनीय बॉट कॉन्फ़िगरेशन तक पहुंच।",
+                b7_title: "कॉपी ट्रेडिंग प्रोजेक्ट",
+                b7_desc: "हमारी कॉपी ट्रेडिंग पहल के माध्यम से हमारे शीर्ष प्रदर्शन करने वाले पेशेवरों के सटीक ट्रेडों को कॉपी करें।",
                 social_title: "हमारे सार्वजनिक समुदाय से जुड़ें",
                 social_desc: "हमारी यात्रा का पालन करें, मुफ्त बाजार अंतर्दृष्टि प्राप्त करें, और हमारे आधिकारिक चैनलों पर नवीनतम वित्तीय समाचारों पर अपडेट रहें।",
                 
@@ -1184,13 +1027,7 @@
                 
                 about_title: "हमारा दर्शन (Our Philosophy)",
                 about_text_1: "\"INVIXTUS का जन्म हताशा से हुआ था। हमने फर्जी गुरुओं और अंधे सिग्नल समूहों से भरा एक व्यापारिक उद्योग देखा, जो जानबूझकर अपने सदस्यों को निर्भर रखने के लिए अशिक्षित रखते थे।\"",
-                about_text_2: "हमने ठीक इसके विपरीत निर्माण करने का निर्णय लिया। पारदर्शिता का किला। हम प्रीमियम इनवी ग्रुप को एक एलीट सिंडिकेट के रूप में संचालित करते हैं जहां प्राथमिक उद्देश्य वास्तविक, कार्रवाई योग्य ज्ञान स्थानांतरित करना है। हम आपको सिग्नल्स के साथ-साथ उनके पीछे का तर्क और चार्ट भी देते हैं।",
-
-                payouts_title: "$100 पूंजी भुगतान",
-                payouts_subtitle: "हमारे प्रीमियम 150 USDTPRO सदस्यों के लिए $100 ट्रेडिंग पूंजी निकासी की लाइव ट्रैकिंग।",
-                payouts_title_full: "सभी $100 पूंजी भुगतान",
-                payouts_subtitle_full: "150 USDTPRO सदस्यों के लिए पूंजी आवंटन की पूर्ण ऐतिहासिक और लाइव ट्रैकिंग।",
-                btn_see_all_payouts: "सभी भुगतान देखें"
+                about_text_2: "हमने ठीक इसके विपरीत निर्माण करने का निर्णय लिया। पारदर्शिता का किला। हम प्रीमियम इनवी ग्रुप को एक एलीट सिंडिकेट के रूप में संचालित करते हैं जहां प्राथमिक उद्देश्य वास्तविक, कार्रवाई योग्य ज्ञान स्थानांतरित करना है। हम आपको सिग्नल्स के साथ-साथ उनके पीछे का तर्क और चार्ट भी देते हैं।"
             }
         };
 
@@ -1238,9 +1075,6 @@
         // ==========================================
         const modal = document.getElementById('payment-modal');
         const modalContent = document.getElementById('payment-modal-content');
-        
-        const txModal = document.getElementById('tx-modal');
-        const txModalContent = document.getElementById('tx-modal-content');
 
         function openPaymentModal() {
             // Reset to step 1
@@ -1284,19 +1118,6 @@
             btn.innerHTML = `<span data-i18n="modal_btn">${btnText}</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>`;
             btn.classList.remove('opacity-50', 'pointer-events-none');
             lucide.createIcons();
-        }
-        
-        function openTxModal(name) {
-            document.getElementById('tx-member-name').innerText = name;
-            txModal.classList.remove('opacity-0', 'pointer-events-none');
-            txModalContent.classList.remove('scale-95');
-            document.body.classList.add('modal-open'); 
-        }
-
-        function closeTxModal() {
-            txModal.classList.add('opacity-0', 'pointer-events-none');
-            txModalContent.classList.add('scale-95');
-            document.body.classList.remove('modal-open');
         }
 
         function copyAddress() {
@@ -1364,88 +1185,8 @@
             }
         });
 
-        // ==========================================
-        // Payouts & Members Logic
-        // ==========================================
-        const membersData = [
-            { name: "Umesh", status: "Completed" },
-            { name: "Sanjay", status: "Processing" },
-            { name: "Niraj", status: "Processing" },
-            { name: "Rahul", status: "Processing" },
-            { name: "Shaurya", status: "Processing" },
-            { name: "Amit", status: "Processing" },
-            { name: "Vikram", status: "Processing" },
-            { name: "Rohan", status: "Processing" },
-            { name: "Aditya", status: "Processing" },
-            { name: "Karan", status: "Processing" },
-            { name: "Manish", status: "Processing" },
-            { name: "Rohit", status: "Processing" },
-            { name: "Vishal", status: "Processing" },
-            { name: "Saurabh", status: "Processing" },
-            { name: "Akash", status: "Processing" },
-            { name: "Neha", status: "Processing" },
-            { name: "Priya", status: "Processing" },
-            { name: "Anjali", status: "Processing" },
-            { name: "Sneha", status: "Processing" },
-            { name: "Pooja", status: "Processing" },
-            { name: "Kartik", status: "Processing" },
-            { name: "Arjun", status: "Processing" },
-            { name: "Siddharth", status: "Processing" },
-            { name: "Varun", status: "Processing" },
-            { name: "Nikhil", status: "Processing" },
-            { name: "Deepak", status: "Processing" },
-            { name: "Sunil", status: "Processing" },
-            { name: "Anil", status: "Processing" },
-            { name: "Manoj", status: "Processing" },
-            { name: "Rakesh", status: "Processing" },
-            { name: "Suresh", status: "Processing" },
-            { name: "Rajesh", status: "Processing" }
-        ];
-
-        function renderMembers(containerId, limit = null) {
-            const container = document.getElementById(containerId);
-            if(!container) return;
-            
-            let html = '';
-            const dataToRender = limit ? membersData.slice(0, limit) : membersData;
-            
-            dataToRender.forEach(member => {
-                const initial = member.name.charAt(0);
-                const isCompleted = member.status === 'Completed';
-                const borderColor = isCompleted ? 'border-l-green-500 shadow-[0_0_15px_rgba(34,197,94,0.1)]' : 'border-l-yellow-500 opacity-80 hover:opacity-100';
-                const avatarClass = isCompleted ? 'bg-green-500/10 border-green-500/30 text-green-500' : 'bg-white/5 border-white/10 text-white';
-                const amountClass = isCompleted ? 'text-green-400' : 'text-white';
-                const badgeClass = isCompleted ? 'bg-green-500/10 text-green-400 border-green-500/30' : 'bg-yellow-500/10 text-yellow-500 border-yellow-500/30';
-                const statusIcon = isCompleted ? '<i data-lucide="check-circle" class="w-3 h-3"></i>' : '<i data-lucide="loader-2" class="w-3 h-3 animate-spin"></i>';
-                
-                const detailsLink = isCompleted ? `<button onclick="openTxModal('${member.name}')" class="text-[9px] text-gray-400 hover:text-white underline mt-1.5 transition-colors">See Details</button>` : '';
-
-                html += `
-                    <div class="glass-panel p-4 flex items-center justify-between border-l-2 ${borderColor} transition-all duration-300">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full border flex items-center justify-center font-bold ${avatarClass}">${initial}</div>
-                            <div>
-                                <h4 class="text-sm font-medium text-white">${member.name}</h4>
-                                <p class="text-[10px] text-gray-500 font-mono mt-0.5">150 USDTPRO</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-end text-right">
-                            <span class="block text-sm font-bold ${amountClass} mb-1.5">$100</span>
-                            <span class="px-2 py-1 border rounded text-[9px] uppercase tracking-wider flex items-center gap-1 ${badgeClass}">
-                                ${statusIcon} ${member.status}
-                            </span>
-                            ${detailsLink}
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        // Initialize Members on load
+        // Initialize Icons on load
         document.addEventListener('DOMContentLoaded', () => {
-            renderMembers('members-container-home', 6); // Only show top 6 on Home Page
-            renderMembers('all-members-container'); // Show all 32 on Payouts Page
             lucide.createIcons();
         });
 
